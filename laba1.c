@@ -22,7 +22,10 @@ int main(int argc, char* argv[])
     }
 
     pid_t child_id;
-    child_id = fork();
+    child_id = fork(); 
+    
+   // https://habr.com/ru/post/125369/
+    
     if(child_id == -1)
     {
         fprintf(stderr, "Fork error\n");
