@@ -11,8 +11,14 @@ void* threadFunc(void* args){
     int *num = (int*) args;
    
 // Короче pthread_create не видит мою функцию и я не знаю что делать тут должно вычисляться cos + sin.
-
+    ???= cos(*num) + sin(*num)
+// или
+    res = cos(*num) + sin(num)
     return res;
+// или без ссылок типо 
+    ??? = cos(num) + sin(num)
+
+    return NULL;
 }
 
 int main() {
