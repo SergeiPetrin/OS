@@ -4,19 +4,9 @@
 #include <stdio.h>
 #include <math.h>
 
-
-
-
-void* threadFunc(void* args){
+void *threadFunc(void* args){
     long double *num = (long double*) args;
-   
-// Короче pthread_create не видит мою функцию и я не знаю что делать тут должно вычисляться cos + sin.
-    *num = cos(*num) + sin(*num)
-// или
-    res = cos(*num) + sin(num)
-    return res;
-// или без ссылок типо 
-    ??? = cos(num) + sin(num)
+    *num = (sin(*num) + cos(*num));
 
     return NULL;
 }
@@ -39,10 +29,9 @@ int main() {
         dlinaOtrezka = granica2 - granica1;
         dots[i] = (((dlinaOtrezka * i) / (to4ki - 1)) + granica1) - 1;
         printf("Точка dots[i] = %Lf\n", dots[i]);
-        result[i] = pthread_create(&massivPotokov[i], NULL, threadFunc, &dots[i]);
-
-    }
+        result[i] = pthread_create(&massivPotokov[i], NULL, threadFunc, &dots[i]);                                                                                                                                     }
     for(int j = 0; j < to4ki; j++) {
         printf("Результат в точке %Lf\n", result[j]);
     }
+
 }
