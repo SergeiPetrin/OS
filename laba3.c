@@ -6,8 +6,7 @@
 
 void *threadFunc(void* args){
     long double *num = (long double*) args;
-    *num = (sin(*num) + cos(*num));
-
+    *num = sin(*num) + cos(*num);
     return NULL;
 }
 
@@ -22,16 +21,20 @@ int main() {
     scanf("%Le", &granica2);
     printf("Введите количество точек\n");
     scanf("%d", &to4ki);
-    pthread_t massivPotokov[to4ki];
-    long double dots[to4ki];
+    pthread_t massivPotokov[to4ki - 1];
+    long double dots[to4ki - 1];
     long double result[to4ki];
-    for(int i = 1; i <= to4ki; i++) {
+    for(int i = 0; i < to4ki; i++) {
         dlinaOtrezka = granica2 - granica1;
-        dots[i] = (((dlinaOtrezka * i) / (to4ki - 1)) + granica1) - 1;
-        printf("Точка dots[i] = %Lf\n", dots[i]);
-        result[i] = pthread_create(&massivPotokov[i], NULL, threadFunc, &dots[i]);                                                                                                                                     }
-    for(int j = 0; j < to4ki; j++) {
-        printf("Результат в точке %Lf\n", result[j]);
+        dots[i] = ( (dlinaOtrezka + 1) * i / to4ki) + granica1;
     }
-
+    for(int i = 0; i < to4ki; i++) {
+        pthread_create(&massivPotokov[i], NULL, threadFunc, &dots[i]);
+        pthread_join(massivPotokov[i], NULL);
+    }
+    printf("Точка Х1 = %Lf\n", dots[0]);
+    for(int i = 1; i < to4ki; i++) {
+            dots[i] = dots[i] * dots[i - 1];
+            printf("Точка X%d = %Lf\n", i, dots[i]);
+    }
 }
