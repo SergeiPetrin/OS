@@ -5,7 +5,6 @@
 #include <string.h>
 #include <sys/wait.h>
 
-
 int main(int argc, char* argv[])
 {
     if( argc <= 1 ) {
