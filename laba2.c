@@ -34,7 +34,7 @@ int main(int argc, char* argv[])
     {
         close(my_pipe[0]); // child doesn't read
        
-        (my_pipe[1], 1); // redirect stdout
+        dup2(my_pipe[1], 1); // redirect stdout
 
         execvp(argv[1], arguments); // https://habr.com/ru/post/423049/
 
